@@ -1,4 +1,4 @@
-package com.socialmedia
+package com.socialmediaX
 
 import android.app.Application
 import com.facebook.react.PackageList
