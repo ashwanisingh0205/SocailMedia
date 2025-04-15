@@ -1,7 +1,10 @@
-import { Animated, StyleSheet, Text, View } from 'react-native'
+import { Alert, Animated, StyleSheet, Text, View } from 'react-native'
 import React, { FC, useEffect, useState } from 'react'
 import { Colors } from '../../constants/Colors'
 import CustomText from '../../components/global/CustomText';
+import { token_storage } from '../../redux/storage';
+import {jwtDecode} from 'jwt-decode'
+import { navigate, resetAndNavigate } from '../../utils/NavigationUtils';
 
 
 const SplashScreen:FC = () => {
@@ -9,7 +12,49 @@ const SplashScreen:FC = () => {
   const [isStop,setIsStop] = useState(false);
    
   const scale=new Animated.Value(1);
+  interface DecodedToken {
+    exp:number;
+  }
 
+  const tokencheck=async()=>{
+    const access_token=token_storage.getString('access_token') as string;
+    const refresh_token=token_storage.getString('refresh_token') as string;
+
+    if(access_token){
+      const decodedAccessToken=jwtDecode<DecodedToken>(access_token);
+      const decodedRefreshToken=jwtDecode<DecodedToken>(refresh_token);
+
+      const currentTime=Date.now()/1000;
+      if(decodedAccessToken.exp<currentTime){
+        resetAndNavigate('LoginScreen');
+        Alert.alert('Session expired','Please login again')
+        return;
+      }
+      if(decodedAccessToken.exp<currentTime){
+        try {
+          
+        } catch (error) {
+          console.log(error)
+          Alert.alert('There was an error')
+          return;
+          }
+      }
+      resetAndNavigate('BottomTab')
+      return;
+
+    }
+    resetAndNavigate('LoginScreen')
+
+  }
+
+  useEffect(()=>{
+    async function deeplink() {
+      tokencheck()
+      }
+    deeplink();
+  }
+ 
+  )
   useEffect(()=>{
     const breathAnimation=Animated.loop(
       Animated.sequence([
@@ -46,7 +91,7 @@ const SplashScreen:FC = () => {
     }}/>
 
 
-    <CustomText variant='h2'>@yes you are</CustomText>
+    <CustomText variant='h2'>not @yes you are@my husband</CustomText>
    
     </View>
 

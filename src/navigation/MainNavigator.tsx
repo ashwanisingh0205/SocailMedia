@@ -6,7 +6,7 @@ import { mergedStacks } from './ScreenCollection';
 const Stack = createNativeStackNavigator();
 const MainNavigator:FC = () => {
   return (
-   <Stack.Navigator initialRouteName='RegisterScreen'
+   <Stack.Navigator initialRouteName='LoginScreen'
    screenOptions={()=>({
     headerShown:false,
    })} >

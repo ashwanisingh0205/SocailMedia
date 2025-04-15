@@ -84,7 +84,7 @@ import {
         username: mention,
       });
     };
-  
+  //
     const renderTextWithMentions = (text: string): JSX.Element[] => {
       const mentionRegex = /@(\w+)/g;
       let lastIndex = 0;
@@ -92,8 +92,10 @@ import {
       let match;
       while ((match = mentionRegex.exec(text)) !== null) {
         const mention = match[1];
+        console.log(match.index)
         const plainTextBeforeMention = text.substring(lastIndex, match.index);
         if (plainTextBeforeMention) {
+          console.log(plainTextBeforeMention)
           elements.push(
             <Text
               onLayout={onLayout}
@@ -135,10 +137,13 @@ import {
           </TouchableOpacity>,
         );
   
+
+
         lastIndex = mentionRegex.lastIndex;
       }
   
       const plainTextAfterLastMention = text.substring(lastIndex);
+      // console.log(plainTextAfterLastMention)
       if (plainTextAfterLastMention) {
         elements.push(
           <Text
@@ -162,10 +167,13 @@ import {
       }
   
       return elements;
+      
     };
-  
+
     return (
+    
       <View style={[styles.container, style]}>
+          
         {typeof children === 'string' ? (
           renderTextWithMentions(children)
         ) : (
