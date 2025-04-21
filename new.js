@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Reelzzz</string>
+	<string>ConnectMe</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -23,6 +23,7 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<!-- <key>CFBundleTypeRole</key> -->
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.110660272190-og78voivslgfvg1ohj4f86po3j9j3hd9</string>
@@ -36,16 +37,18 @@
 			<string>reelzzz</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>reelzzz</string>
+				<string>reels</string>
 			</array>
 		</dict>
 	</array>
-	<key>GIDClientID</key>
-	<string>110660272190-og78voivslgfvg1ohj4f86po3j9j3hd9.apps.googleusercontent.com</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>567835299650995</string>
 	<key>FacebookDisplayName</key>
-	<string>Reelzzz</string>
+	<string>SocialMedia</string>
+	<key>GIDClientID</key>
+	<string>110660272190-og78voivslgfvg1ohj4f86po3j9j3hd9.apps.googleusercontent.com</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -53,8 +56,6 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -64,30 +65,16 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Let me use your media library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need your permission to access your camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need your permission to access your photo library</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need your permission to access your photo library</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>arm64</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need your permission to access your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
@@ -104,5 +91,19 @@
 		<string>FontAwesome.ttf</string>
 		<string>Audiowide-Regular.ttf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

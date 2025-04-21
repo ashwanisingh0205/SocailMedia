@@ -5,6 +5,10 @@ import CustomText from '../../components/global/CustomText';
 import { token_storage } from '../../redux/storage';
 import {jwtDecode} from 'jwt-decode'
 import { navigate, resetAndNavigate } from '../../utils/NavigationUtils';
+import { REFRESH_TOKEN } from '../../redux/API';
+import { refresh_tokens } from '../../redux/apiConfig';
+import { useAppDispatch } from '../../redux/reduxHook';
+import { refetchuser } from '../../redux/action/userAction';
 
 
 const SplashScreen:FC = () => {
@@ -12,6 +16,7 @@ const SplashScreen:FC = () => {
   const [isStop,setIsStop] = useState(false);
    
   const scale=new Animated.Value(1);
+  const dispatch=useAppDispatch();
   interface DecodedToken {
     exp:number;
   }
@@ -25,13 +30,18 @@ const SplashScreen:FC = () => {
       const decodedRefreshToken=jwtDecode<DecodedToken>(refresh_token);
 
       const currentTime=Date.now()/1000;
-      if(decodedAccessToken.exp<currentTime){
+      if(decodedRefreshToken.exp<currentTime){
         resetAndNavigate('LoginScreen');
         Alert.alert('Session expired','Please login again')
         return;
       }
       if(decodedAccessToken.exp<currentTime){
         try {
+          refresh_tokens();
+          dispatch(refetchuser())
+
+          
+
           
         } catch (error) {
           console.log(error)
