@@ -12,11 +12,14 @@ import { Image } from 'react-native';
 import { useRouter } from 'react-native-actions-sheet/dist/src/hooks/use-router';
 import { useRoute } from '@react-navigation/native';
 import { useAppDispatch } from '../../redux/reduxHook';
-import { checkUsernameAvailability } from '../../redux/action/userAction';
+import { checkUsernameAvailability, register } from '../../redux/action/userAction';
 import {launchImageLibrary,launchCamera} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { TextInput } from 'react-native-gesture-handler';
+import { uploadFile } from '../../redux/action/fileAction';
+import GradientButton from '../../components/global/GradientButton';
+import { navigate } from '../../utils/NavigationUtils';
 
 
 interface initialdata{
@@ -32,9 +35,7 @@ const RegisterScreen = () => {
   const dispatch=useAppDispatch();
   const item=data.params as initialdata;
   const [username, setUsername] = useState<string>('');
-  const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(
-  'ashwani'
-  );
+  const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingMessage, setLoadingMessage] = useState<string>('');
   const [isLocalImagePickedUp, setIsLocalImagePickedUp] =
@@ -142,6 +143,7 @@ const handleSubmit = async () => {
   if (isLocalImagePickedUp) {
     setLoadingMessage('Uploading Image...📦🎞️');
     const uploadResult = await dispatch(uploadFile(imageUri, 'user_image'));
+    console.log('uploadresult-- ',uploadResult)
     if (uploadResult) {
       userImage = uploadResult;
       setLoadingMessage('Image Uploaded...✅');
@@ -161,9 +163,11 @@ const handleSubmit = async () => {
     id_token: item?.id_token,
     username,
   };
+  console.log('my naem is -----')
   await dispatch(register(registerData));
   setLoading(false);
 };
+console.log('imageee+++++',imageUri)
  
   return (
     <CustomSafeAreaView>
@@ -250,13 +254,17 @@ const handleSubmit = async () => {
             </CustomText>
           </View>
         ) : (
-          <Text>yes</Text>
-          // <GradientButton
-          //   text="Let's Dive in"
-          //   iconName="swim"
-          //   onPress={handleSubmit}
-          // />
+       
+          <GradientButton
+            text="Let's Dive in"
+            iconName="swim"
+            onPress={handleSubmit}
+          />
+         
+
         )}
+       
+
 
         </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
