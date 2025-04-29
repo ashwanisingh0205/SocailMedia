@@ -24,6 +24,7 @@ export const refetchuser=async(dispatch:any)=>{
 }
 export const register=(Data:RegisterData)=>async(dispatch:any)=>{
     const res=await axios.post(REGISTER,Data)
+    console.log(res.data)
 
 }
 
