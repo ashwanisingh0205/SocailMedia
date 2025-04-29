@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native'
 import { useAppDispatch } from '../../redux/reduxHook'
 import { signInWithFacebook, signInWithGoogle } from '../../redux/SocialLogin'
+import { navigate } from '../../utils/NavigationUtils'
 
 const LoginScreen = () => {
   const dispatch=useAppDispatch();
@@ -37,7 +38,7 @@ const LoginScreen = () => {
       backgroundcolor={Colors.text}
       onPress={async()=>await dispatch(signInWithGoogle())}/>
 
-      <TouchableOpacity style={styles.footer}>
+      <TouchableOpacity style={styles.footer} onPress={()=>navigate('RegisterScreen')}>
         <CustomText variant='h8' >
           Design and Developed by -Ashwani
         </CustomText>

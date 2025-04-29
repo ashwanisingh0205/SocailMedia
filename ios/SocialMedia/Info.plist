@@ -26,7 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.110660272190-og78voivslgfvg1ohj4f86po3j9j3hd9</string>
-				<string>fb567835299650995</string>
+				<string>fb1025367769563646</string>
 			</array>
 		</dict>
 		<dict>
@@ -43,9 +43,11 @@
 	<key>GIDClientID</key>
 	<string>110660272190-og78voivslgfvg1ohj4f86po3j9j3hd9.apps.googleusercontent.com</string>
 	<key>FacebookAppID</key>
-	<string>567835299650995</string>
+	<string>1025367769563646</string>
 	<key>FacebookDisplayName</key>
-	<string>Reelzzz</string>
+	<string>SocialMedia</string>
+	<key>FacebookClientToken</key>
+<string>cc0d7b7f32352013dd79787e4ebd8b28</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

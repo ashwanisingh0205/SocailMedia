@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">SocialMedia</string>
      <!-- Facebook Config Here -->
-    <string name="facebook_app_id">567835299650995</string>
-    <string name="fb_login_protocol_scheme">fbc6a0a0609ac61ee481a3d1e8a9b29e</string>
-    <string name="facebook_client_token">3ddee54a11452f415125dd1ebe8729a3</string>
+    <string name="facebook_app_id">1025367769563646</string>
+    <string name="fb_login_protocol_scheme">fb1025367769563646</string>
+    <string name="facebook_client_token">cc0d7b7f32352013dd79787e4ebd8b28</string>
       <!-- Facebook Config Here -->
 </resources>

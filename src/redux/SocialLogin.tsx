@@ -1,16 +1,21 @@
-import { Alert } from "react-native";
-import { navigate, resetAndNavigate } from "../utils/NavigationUtils";
-import { setUser } from "./reducer/userSlice";
-import { token_storage } from "./storage"
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { LOGIN } from "./API";
-import axios from "axios";
+import { Alert } from 'react-native';
+import { navigate, resetAndNavigate } from '../utils/NavigationUtils';
+import { setUser } from './reducer/userSlice';
+import { token_storage } from './storage';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { LOGIN } from './API';
+import axios from 'axios';
 
-import{ LoginManager,
-    AccessToken,
-    GraphRequest,
-    GraphRequestManager} from 'react-native-fbsdk'
-import { useDispatch } from "react-redux";
+import {
+  LoginManager,
+  AccessToken,
+  GraphRequest,
+  GraphRequestManager,
+  Settings,
+} from 'react-native-fbsdk-next';
+
+// Initialize Facebook SDK
+Settings.initializeSDK();
 
 interface RegisterData{
     id_token:string,
@@ -20,31 +25,32 @@ interface RegisterData{
     userImage:string
 }
 
-const handleSignInSuccess=async(res:any, dispatch:any)=>{
+const handleSignInSuccess = async(res:any, dispatch:any)=>{
     token_storage.set('access_token',res.data.tokens.access_token);
     token_storage.set('refresh_token',res.data.tokens.refresh_token);
-    await dispatch(setUser(res.data.user))
-    resetAndNavigate('BottomTab')
-}
+    await dispatch(setUser(res.data.user));
+    resetAndNavigate('BottomTab');
+};
 
-const handleSignInError=async(error:any,data:RegisterData)=>{
+const handleSignInError = async(error:any,data:RegisterData)=>{
     console.log('Error',error);
- 
-    if(error.response.status===401){
-        console.log(data)
+
+    if(error.response.status === 401){
+        console.log(data);
         navigate('RegisterScreen',{
            ...data,
                    });
         return;
     }
-    Alert.alert('we are facing issue try again later')
-}
+    Alert.alert('we are facing issue try again later');
+};
 
 export const signInWithGoogle = () => async (dispatch: any) => {
     try {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signOut();
       const {idToken, user} = await GoogleSignin.signIn();
+      // console.log('user get by google',user)
       await axios
         .post(LOGIN, {
           provider: 'google',
@@ -67,57 +73,72 @@ export const signInWithGoogle = () => async (dispatch: any) => {
       console.log('GOOGLE ERROR', error);
     }
   };
-  
+
 
   export const signInWithFacebook = () => async (dispatch: any) => {
-    LoginManager.logOut();
-    LoginManager.logInWithPermissions(['email public_profile']).then(
-      result => {
-        if (result.isCancelled) {
-        } else {
-          AccessToken.getCurrentAccessToken().then(async (data: any) => {
-             if (!data) {
-    Alert.alert('Could not retrieve Facebook access token');
-    return;
-  }
-            const infoRequest = new GraphRequest(
-              '/me?fields=name,picture,email',
-              null,
-              async (err: any, result: any) => {
-                if (err) {
-                  Alert.alert('Facebook Error');
-                  return;
-                }
-                console.log(result, err);
-  
-                await axios
-                  .post(LOGIN, {
-                    provider: 'facebook',
-                    id_token: data?.accessToken,
-                  })
-                  .then(async res => {
-                    await handleSignInSuccess(res, dispatch);
-                  })
-                  .catch((err: any) => {
-                    const errorData = {
-                      email: result.email,
-                      name: result.name,
-                      userImage: result?.picture?.data?.url,
-                      provider: 'facebook',
-                      id_token: data?.accessToken,
-                    };
-                    handleSignInError(err, errorData);
-                  });
+    try {
+      // First logout from any existing session
+      await LoginManager.logOut();
+
+      // Request permissions - note the array format
+      const result = await LoginManager.logInWithPermissions(['email', 'public_profile']);
+
+      if (result.isCancelled) {
+        console.log('User cancelled login');
+        return;
+      }
+
+      // Get access token
+      const data = await AccessToken.getCurrentAccessToken();
+      if (!data) {
+        throw new Error('Failed to get access token');
+      }
+
+      // Create graph request
+      return new Promise((resolve, reject) => {
+        const infoRequest = new GraphRequest(
+          '/me',
+          {
+            parameters: {
+              fields: {
+                string: 'email,name,picture.type(large)',
               },
-            );
-  
-            new GraphRequestManager().addRequest(infoRequest).start();
-          });
-        }
-      },
-      error => {
-        console.log(`FB Error`, error);
-      },
-    );
+            },
+          },
+          async (error, result) => {
+            if (error) {
+              console.error('Graph API Error:', error);
+              Alert.alert('Error', 'Failed to get profile information');
+              reject(error);
+              return;
+            }
+
+            try {
+              const response = await axios.post(LOGIN, {
+                provider: 'facebook',
+                id_token: data.accessToken,
+              });
+
+              await handleSignInSuccess(response, dispatch);
+              resolve(response);
+            } catch (err) {
+              const errorData = {
+                email: result.email,
+                name: result.name,
+                userImage: result?.picture?.data?.url,
+                provider: 'facebook',
+                id_token: data.accessToken,
+              };
+              handleSignInError(err, errorData);
+              reject(err);
+            }
+          }
+        );
+
+        new GraphRequestManager().addRequest(infoRequest).start();
+      });
+    } catch (error) {
+      console.error('Facebook login error:', error);
+      Alert.alert('Error', 'Failed to login with Facebook');
+    }
   };
-  

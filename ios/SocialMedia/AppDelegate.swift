@@ -4,6 +4,11 @@ import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import FBSDKCoreKit
 import AVFoundation
+import FBSDKLoginKit
+import FBSDKShareKit
+import SafariServices
+import AuthenticationServices
+
 
 @main
 class AppDelegate: RCTAppDelegate {

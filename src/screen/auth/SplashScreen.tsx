@@ -101,7 +101,7 @@ const SplashScreen:FC = () => {
     }}/>
 
 
-    <CustomText variant='h2'>not @yes you are@my husband</CustomText>
+    <CustomText variant='h2'>Not Right Now</CustomText>
    
     </View>
 
