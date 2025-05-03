@@ -36,7 +36,7 @@ const handleSignInError = async(error:any,data:RegisterData)=>{
     console.log('Error',error);
 
     if(error.response.status === 401){
-        console.log(data);
+        // console.log(data);
         navigate('RegisterScreen',{
            ...data,
                    });
@@ -50,7 +50,7 @@ export const signInWithGoogle = () => async (dispatch: any) => {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signOut();
       const {idToken, user} = await GoogleSignin.signIn();
-      // console.log('user get by google',user)
+      console.log('user get by google',user)
       await axios
         .post(LOGIN, {
           provider: 'google',

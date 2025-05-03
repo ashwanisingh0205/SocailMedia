@@ -50,7 +50,7 @@ const BottomTab:FC = ()=>{
         })}
         >
             <Tab.Screen name="Home" component={HomeScreen}/>
-            <Tab.Screen name="Post" component={ProfileScreen}
+            <Tab.Screen name="Post" component={HomeScreen}
             options={{
                 // eslint-disable-next-line react/no-unstable-nested-components
                 tabBarIcon:()=>{

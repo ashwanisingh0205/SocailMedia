@@ -54,6 +54,9 @@ const RegisterScreen = () => {
   const data=await dispatch(checkUsernameAvailability(username));
   setUsernameAvailable(data);
  }
+ useEffect(()=>{
+  checkUsername()
+ },[username])
  const handleImagePicker=()=>{
   Alert.alert('Select Image', 'Choose an option', [
     {
@@ -143,7 +146,6 @@ const handleSubmit = async () => {
   if (isLocalImagePickedUp) {
     setLoadingMessage('Uploading Image...📦🎞️');
     const uploadResult = await dispatch(uploadFile(imageUri, 'user_image'));
-    console.log('uploadresult-- ',uploadResult)
     if (uploadResult) {
       userImage = uploadResult;
       setLoadingMessage('Image Uploaded...✅');
@@ -163,11 +165,10 @@ const handleSubmit = async () => {
     id_token: item?.id_token,
     username,
   };
-  console.log('my naem is -----')
   await dispatch(register(registerData));
   setLoading(false);
 };
-console.log('imageee+++++',imageUri)
+
  
   return (
     <CustomSafeAreaView>
@@ -211,7 +212,7 @@ console.log('imageee+++++',imageUri)
             {usernameAvailable!==null &&
             (
               <CustomText style={[styles.label,{alignSelf:'flex-end'}]}>
-                {usernameAvailable ? '✅':'❌'}
+                {usernameAvailable ? ('✅'):(<Text style={{color:'#ff0000'}}>Is Already Taken</Text>)}
               </CustomText>
             )}
            </View>

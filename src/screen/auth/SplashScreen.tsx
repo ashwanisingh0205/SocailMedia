@@ -9,6 +9,7 @@ import { REFRESH_TOKEN } from '../../redux/API';
 import { refresh_tokens } from '../../redux/apiConfig';
 import { useAppDispatch } from '../../redux/reduxHook';
 import { refetchuser } from '../../redux/action/userAction';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 const SplashScreen:FC = () => {
@@ -61,7 +62,10 @@ const SplashScreen:FC = () => {
     async function deeplink() {
       tokencheck()
       }
-    deeplink();
+      setTimeout(() => {
+        deeplink();
+      }, 2000);
+    
   }
  
   )
@@ -70,12 +74,12 @@ const SplashScreen:FC = () => {
       Animated.sequence([
         Animated.timing(scale,{
           toValue:1.2,//scale up
-          duration:2000,
+          duration:1000,
           useNativeDriver:true,
         }),
         Animated.timing(scale,{
           toValue:1,  //scale down
-          duration:2000,
+          duration:1000,
           useNativeDriver:true,
         })
       ])
@@ -100,8 +104,9 @@ const SplashScreen:FC = () => {
     transform:[{scale}]
     }}/>
 
-
-    <CustomText variant='h2'>Not Right Now</CustomText>
+      
+    {/* <CustomText variant='h2'>Connect Me</CustomText> */}
+   
    
     </View>
 
@@ -120,5 +125,9 @@ const styles = StyleSheet.create({
     
 
 
-  }
+  },
+  linearGradient: {
+    flex: 1,
+    height: 1,
+  },
 })

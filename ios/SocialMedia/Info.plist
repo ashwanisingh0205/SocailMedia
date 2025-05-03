@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Reelzzz</string>
+	<string>Connect-Me</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -47,7 +47,7 @@
 	<key>FacebookDisplayName</key>
 	<string>SocialMedia</string>
 	<key>FacebookClientToken</key>
-<string>cc0d7b7f32352013dd79787e4ebd8b28</string>
+	<string>cc0d7b7f32352013dd79787e4ebd8b28</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
