@@ -5,7 +5,7 @@ import RegisterScreen from "../screen/auth/RegisterScreen";
 import HomeScreen from "../screen/dashboard/HomeScreen";
 import BottomTab from "./BottomTab";
 import PickReelScreen from "../screen/reel/PickReelScreen";
-import UploadReelScreen from "../components/reel/UploadReelScreen";
+import UploadReelScreen from "../screen/reel/UploadReelScreen";
 
 
 export const authStack = [

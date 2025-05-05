@@ -127,6 +127,7 @@ const handleSubmit = async () => {
   setLoading(true);
   setLoadingMessage('Creating Account...🚀');
   const trimmedUsername = username.trim().toLowerCase();
+  setUsername(trimmedUsername)
   const trimmedFullName = fullName.trim();
   const trimmedBio = bio.trim();
 
@@ -136,7 +137,7 @@ const handleSubmit = async () => {
     !trimmedBio ||
     !usernameAvailable
   ) {
-    Alert.alert('Please fill valid details');
+    Alert.alert('Please fill valid details ','You should fill the username field without any spaces ');
     setLoading(false);
     setLoadingMessage('');
     return;
