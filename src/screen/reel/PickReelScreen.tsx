@@ -152,7 +152,7 @@ const result = await launchImageLibrary({
 //   setLoading(false)
 // }
 setLoading(false)
-
+console.log('result',result?.assets[0]?.uri )
 
 // const filepath=result.assets[0].uri
     createThumbnail({
@@ -222,7 +222,7 @@ setLoading(false)
              (<View style={{flex:1,justifyContent:'center',alignItems:'center'}}><ActivityIndicator size='large' color={'white'}/></View>):(<>
               <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
             <TouchableOpacity onPress={handleVideoSelect}>
-              <CustomText style={{backgroundColor:'#0077B6',padding:8,borderRadius:12,fontWeight:500}}>Please use Your Photo Library</CustomText>
+              <CustomText style={{backgroundColor:'#57A0D2',padding:8,borderRadius:12,fontWeight:500}}>Please use Your Photo Library </CustomText>
             </TouchableOpacity>
             </View></>) }
            

@@ -36,7 +36,7 @@ const handleSignInError = async(error:any,data:RegisterData)=>{
     console.log('Error',error);
 
     if(error.response.status === 401){
-        // console.log(data);
+        console.log(data);
         navigate('RegisterScreen',{
            ...data,
                    });
@@ -123,9 +123,9 @@ export const signInWithGoogle = () => async (dispatch: any) => {
               resolve(response);
             } catch (err) {
               const errorData = {
-                email: result.email,
-                name: result.name,
-                userImage: result?.picture?.data?.url,
+                email:result.email,
+                name:result.name,
+                userImage:result?.picture?.data?.url,
                 provider: 'facebook',
                 id_token: data.accessToken,
               };

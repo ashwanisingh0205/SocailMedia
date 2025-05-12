@@ -41,6 +41,7 @@ const UploadReelScreen: React.FC = () => {
               numberOfLines={8}
             />
           </View>
+         
           
           <GradientButton
             text="Upload"
@@ -50,7 +51,8 @@ const UploadReelScreen: React.FC = () => {
               startUpload(item?.thumb_uri, item?.file_uri, caption);
             }}
           />
-        </ScrollView>
+           </ScrollView>
+      
       </CustomSafeAreaView>
     );
   };

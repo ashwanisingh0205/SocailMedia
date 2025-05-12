@@ -72,11 +72,11 @@ import { createReel } from '../../redux/action/reelAction';
         setUploading(true);
         setLoadingMessage('Uploading Thumbnail...🚀');
         showUpload(true);
-          console.log('ashwan',thumb_uri)
+        //   console.log('ashwan',thumb_uri)
         const thumbnailResponse = await dispatch(
           uploadFile(thumb_uri, 'reel_thumbnail'),
         );
-        console.log('++',thumbnailResponse)
+        // console.log('++',thumbnailResponse)
         if (!thumbnailResponse) {
           throw new Error('There was an upload error');
         }
